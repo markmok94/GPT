@@ -1,42 +1,42 @@
 {
-    "breakpointLocation": "NONE",
-    "browserLog": false,
-    "closeCookieModals": false,
-    "debugLog": false,
-    "downloadCss": true,
-    "downloadMedia": true,
-    "excludes": [
-        {
-            "glob": "/**/*.{png,jpg,jpeg,pdf}"
-        }
-    ],
-    "globs": [
-        {
-            "glob": "https://crawlee.dev/js/*/*"
-        }
-    ],
-    "headless": true,
-    "ignoreCorsAndCsp": false,
-    "ignoreSslErrors": false,
-    "injectJQuery": true,
-    "keepUrlFragments": false,
-    "linkSelector": "a[href]",
-    "pageFunction": "// The function accepts a single argument: the \"context\" object.\n// For a complete list of its properties and functions,\n// see https://apify.com/apify/web-scraper#page-function \nasync function pageFunction(context) {\n    const xpath = '//*[@id=\"__next\"]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div[2]/div[3]/div[2]/div';\n    const element = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n    const holders = element ? element.textContent.trim() : null;\n    context.log.info(`URL: ${context.request.url}`);\n    return { url: context.request.url, holders };\n}",
-    "postNavigationHooks": "// We need to return array of (possibly async) functions here.\n// The functions accept a single argument: the \"crawlingContext\" object.\n[\n    async (crawlingContext) => {\n        // ...\n    },\n]",
-    "preNavigationHooks": "// We need to return array of (possibly async) functions here.\n// The functions accept two arguments: the \"crawlingContext\" object\n// and \"gotoOptions\".\n[\n    async (crawlingContext, gotoOptions) => {\n        // ...\n    },\n]\n",
-    "proxyConfiguration": {
-        "useApifyProxy": true
-    },
-    "respectRobotsTxtFile": true,
-    "runMode": "DEVELOPMENT",
-    "startUrls": [
-        {
-            "url": "https://solscan.io/token/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
-            "method": "GET"
-        }
-    ],
-    "useChrome": false,
-    "waitUntil": [
-        "networkidle2"
-    ]
+  "breakpointLocation": "NONE",
+  "browserLog": false,
+  "closeCookieModals": false,
+  "debugLog": false,
+  "downloadCss": true,
+  "downloadMedia": true,
+  "excludes": [
+    {
+      "glob": "/**/*.{png,jpg,jpeg,pdf}"
+    }
+  ],
+  "globs": [
+    {
+      "glob": "https://crawlee.dev/js/*/*"
+    }
+  ],
+  "headless": true,
+  "ignoreCorsAndCsp": true,
+  "ignoreSslErrors": false,
+  "injectJQuery": true,
+  "keepUrlFragments": false,
+  "linkSelector": "a[href]",
+  "pageFunction": "// The function accepts a single argument: the \"context\" object.\n// For a complete list of its properties and functions,\n// see https://apify.com/apify/web-scraper#page-function \nasync function pageFunction(context) {\n    const page = context.page;\n    const xpath = \"//*[text()='Current Supply']/following::div[1]\";\n    await page.waitForXPath(xpath, { timeout: 10000 });\n    const node = await page.$x(xpath).then(res => res[0]);\n    let currentSupply = node ? await page.evaluate(el => el.textContent.trim(), node) : null;\n    context.log.info(`URL: ${context.request.url}`);\n    return { url: context.request.url, currentSupply };\n}\n",
+  "postNavigationHooks": "// We need to return array of (possibly async) functions here.\n// The functions accept a single argument: the \"crawlingContext\" object.\n[\n    async (crawlingContext) => {\n        // ...\n    },\n]",
+  "preNavigationHooks": "// We need to return array of (possibly async) functions here.\n// The functions accept two arguments: the \"crawlingContext\" object\n// and \"gotoOptions\".\n[\n    async (crawlingContext, gotoOptions) => {\n        // ...\n    },\n]\n",
+  "proxyConfiguration": {
+    "useApifyProxy": true
+  },
+  "respectRobotsTxtFile": true,
+  "runMode": "DEVELOPMENT",
+  "startUrls": [
+    {
+      "url": "https://solscan.io/token/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+      "method": "GET"
+    }
+  ],
+  "useChrome": false,
+  "waitUntil": [
+    "networkidle2"
+  ]
 }

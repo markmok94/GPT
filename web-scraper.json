@@ -21,7 +21,7 @@
     "injectJQuery": true,
     "keepUrlFragments": false,
     "linkSelector": "a[href]",
-    "pageFunction": "async function pageFunction(context) {\n    const name = context.request.userData.name;\n    const xpath = '//*[text()='Current Supply']/following::div[1]';\n    const element = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n    const currentSupply = element ? element.textContent.trim() : null;\n    context.log.info(`URL: ${context.request.url}, Current Supply: ${currentSupply}`);\n    return { name, url: context.request.url, currentSupply };\n}",
+    "pageFunction": "async function pageFunction(context) {\n    const name = context.request.userData.name;\n    const xpath = \"//*[text()='Current Supply']/following::div[1]\";\n    const element = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n    const currentSupply = element ? element.textContent.trim() : null;\n    context.log.info(`URL: ${context.request.url}, Current Supply: ${currentSupply}`);\n    return { name, url: context.request.url, currentSupply };\n}",
     "postNavigationHooks": "[\n    async (crawlingContext) => {\n        // ...\n    }\n]",
     "preNavigationHooks": "[\n    async (crawlingContext, gotoOptions) => {\n        // ...\n    }\n]",
     "proxyConfiguration": {
@@ -30,14 +30,62 @@
     "respectRobotsTxtFile": true,
     "runMode": "DEVELOPMENT",
     "startUrls": [
-        { "url": "https://solscan.io/token/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", "method": "GET", "userData": { "name": "USDT" } },
-        { "url": "https://solscan.io/token/2b1kV6DkPAnxd5ixfnxCpjxmKwqjjaYmCZfHsFu24GXo", "method": "GET", "userData": { "name": "PYUSD" } },
-        { "url": "https://solscan.io/token/HVbpJAQGNpkgBaYBZQBR1t7yFdvaYVp2vCQQfKKEN4tM", "method": "GET", "userData": { "name": "USDP" } },
-        { "url": "https://solscan.io/token/USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX", "method": "GET", "userData": { "name": "USDH" } },
-        { "url": "https://solscan.io/token/7kbnvuGBxxj8AG9qp8Scn56muWGaRaFqxg1FsRp3PaFT", "method": "GET", "userData": { "name": "UXD" } },
-        { "url": "https://solscan.io/token/A1KLoBrKBde8Ty9qtNQUtq3C2ortoC3u7twggz7sEto6", "method": "GET", "userData": { "name": "USDY" } },
-        { "url": "https://solscan.io/token/DEkqHyPN7GMRJ5cArtQFAWefqbZb33Hyf6s5iCwjEonT", "method": "GET", "userData": { "name": "USDe" } },
-        { "url": "https://solscan.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "method": "GET", "userData": { "name": "USDC" } }
+        {
+            "url": "https://solscan.io/token/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+            "method": "GET",
+            "userData": {
+                "name": "USDT"
+            }
+        },
+        {
+            "url": "https://solscan.io/token/2b1kV6DkPAnxd5ixfnxCpjxmKwqjjaYmCZfHsFu24GXo",
+            "method": "GET",
+            "userData": {
+                "name": "PYUSD"
+            }
+        },
+        {
+            "url": "https://solscan.io/token/HVbpJAQGNpkgBaYBZQBR1t7yFdvaYVp2vCQQfKKEN4tM",
+            "method": "GET",
+            "userData": {
+                "name": "USDP"
+            }
+        },
+        {
+            "url": "https://solscan.io/token/USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+            "method": "GET",
+            "userData": {
+                "name": "USDH"
+            }
+        },
+        {
+            "url": "https://solscan.io/token/7kbnvuGBxxj8AG9qp8Scn56muWGaRaFqxg1FsRp3PaFT",
+            "method": "GET",
+            "userData": {
+                "name": "UXD"
+            }
+        },
+        {
+            "url": "https://solscan.io/token/A1KLoBrKBde8Ty9qtNQUtq3C2ortoC3u7twggz7sEto6",
+            "method": "GET",
+            "userData": {
+                "name": "USDY"
+            }
+        },
+        {
+            "url": "https://solscan.io/token/DEkqHyPN7GMRJ5cArtQFAWefqbZb33Hyf6s5iCwjEonT",
+            "method": "GET",
+            "userData": {
+                "name": "USDe"
+            }
+        },
+        {
+            "url": "https://solscan.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+            "method": "GET",
+            "userData": {
+                "name": "USDC"
+            }
+        }
     ],
     "useChrome": false,
     "waitUntil": [

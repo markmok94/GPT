@@ -16,12 +16,12 @@
         }
     ],
     "headless": true,
-    "ignoreCorsAndCsp": false,
+    "ignoreCorsAndCsp": true,
     "ignoreSslErrors": false,
-    "injectJQuery": true,
+    "injectJQuery": false,
     "keepUrlFragments": false,
     "linkSelector": "a[href]",
-    "pageFunction": "async function pageFunction(context) {\n    const name = context.request.userData.name;\n    const xpath = \"//*[text()='Current Supply']/following::div[1]\";\n    const element = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n    const currentSupply = element ? element.textContent.trim() : null;\n    context.log.info(`URL: ${context.request.url}, Current Supply: ${currentSupply}`);\n    return { name, url: context.request.url, currentSupply };\n}",
+    "pageFunction": "async function pageFunction(context) {\n    const name = context.request.userData.name;\n    let currentSupply = null;\n    const label = Array.from(document.querySelectorAll('div')).find(el => el.textContent.trim() === 'Current Supply');\n    if (label) {\n        const valueDiv = label.parentElement.nextElementSibling || label.nextElementSibling;\n        if (valueDiv) {\n            const val = valueDiv.querySelector('div');\n            currentSupply = (val || valueDiv).textContent.trim();\n        }\n    }\n    context.log.info(`URL: ${context.request.url}, Current Supply: ${currentSupply}`);\n    return { name, url: context.request.url, currentSupply };\n}",
     "postNavigationHooks": "[\n    async (crawlingContext) => {\n        // ...\n    }\n]",
     "preNavigationHooks": "[\n    async (crawlingContext, gotoOptions) => {\n        // ...\n    }\n]",
     "proxyConfiguration": {
@@ -92,3 +92,4 @@
         "networkidle2"
     ]
 }
+
